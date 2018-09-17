@@ -1,18 +1,58 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import logo from './logo.svg';
 import './App.css';
+import Title from './components/Title';
+import Navbar from './components/Navbar';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      header: "Title",
+      footer: "Footer",
+      events: [],
+    };
+  }
+
+  //Function rendering the webpage header.
+  renderHeader() {
+    return (
+      <div class="item1">
+        <Title title={this.state.header}/>
+      </div>
+    );
+  }
+
+  //Function rendering the art based on user settings.
+  renderArt() {
+    return (
+      <div className="item2">
+        <Title title={"Art"}/>
+      </div>
+    );
+  }
+
+  //Function rendering the webpage footer.
+  renderFooter() {
+    return (
+      <div className="item3">
+        <Title title={this.state.footer}/>
+        <Navbar></Navbar>
+      </div>
+    );
+  }
+
+  //Function rendering the application. 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div class="grid-container">
+          {this.renderHeader()}
+          {this.renderArt()}
+          {this.renderFooter()}
+        </div>
       </div>
     );
   }
