@@ -20,8 +20,9 @@ class App extends Component {
   //Function rendering the webpage header.
   renderHeader() {
     return (
-      <div class="item1">
-        <Title title={this.state.header}/>
+      <div className="item1">
+          <Navbar/>
+          <Title title={this.state.header}/>
       </div>
     );
   }
@@ -30,7 +31,6 @@ class App extends Component {
   renderArt() {
     return (
       <div className="item2">
-        <Title title={"Art"}/>
         <Tabs/>
       </div>
     );
@@ -41,7 +41,6 @@ class App extends Component {
     return (
       <div className="item3">
         <Title title={this.state.footer}/>
-        <Navbar/>
       </div>
     );
   }
@@ -50,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div class="grid-container">
+        <div className="grid-container">
           {this.renderHeader()}
           {this.renderArt()}
           {this.renderFooter()}
