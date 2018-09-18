@@ -14,15 +14,50 @@ class App extends Component {
       header: "Title",
       footer: "Footer",
       events: [],
+      settings: {
+        motive: 1,
+        sound: 1,
+        text: 1
+      }
     };
+  }
+
+  //Function that gets passed down to the Navbar - changing motive setting.
+  changeMotive = (value) => {
+    this.setState({settings: {
+        motive: value,
+        sound: this.state.settings.sound,
+        text: this.state.settings.text
+        }
+    });
+  }
+
+  //Function that gets passed down to the Navbar - changing sound setting.
+  changeSound = (value) => {
+    this.setState({settings: {
+      motive: this.state.settings.motive,
+      sound: value,
+      text: this.state.settings.text
+      }
+  });
+  }
+
+  //Function that gets passed down to the Navbar - changing text setting.
+  changeText = (value) => {
+    this.setState({settings: {
+      motive: this.state.settings.motive,
+      sound: this.state.settings.sound,
+      text: value
+      }
+  });
   }
 
   //Function rendering the webpage header.
   renderHeader() {
     return (
       <div className="item1">
-          <Navbar/>
-          <Title title={this.state.header}/>
+          <Navbar changeMotive={this.changeMotive} changeSound={this.changeSound} changeText={this.changeText}/>
+          <Title title="Header"/>
       </div>
     );
   }
@@ -31,7 +66,7 @@ class App extends Component {
   renderArt() {
     return (
       <div className="item2">
-        <Tabs/>
+        <Tabs settings={this.state.settings}/>
       </div>
     );
   }

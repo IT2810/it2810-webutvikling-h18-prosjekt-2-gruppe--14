@@ -3,7 +3,10 @@ import './../style/Tabs.css';
 
 class Tabs extends Component {
     render() {
+        //Innstillingene er tilgjengelig i this.props.settings. De består av tall 1 til 3 i de tre kategoriene, motive, sound og text.
+        console.log(this.props.settings);
         return (
+
             <div>
                 <div className="tab-container">
                     <button className="tab" onClick={e => {this.openTab(e, 'art-1')}}>1</button>
@@ -32,7 +35,7 @@ class Tabs extends Component {
                     /* Generate art here */
                 </div>
             </div>
-        )
+        );
     }
 
     openTab(e, selectedElement) {
@@ -40,12 +43,10 @@ class Tabs extends Component {
         for (let i = 0; i < elements.length; i++) {
             elements[i].style.display = "none";
         }
-
         let tabs = document.getElementsByClassName("tab");
         for (let i = 0; i < tabs.length; i++) {
             tabs[i].className = tabs[i].className.replace(" active", "");
         }
-
         document.getElementById(selectedElement).style.display = "block";
         e.currentTarget.className += " active";
     }
