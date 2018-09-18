@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import Title from './components/Title';
 import Navbar from './components/Navbar';
+import Tabs from './components/Tabs';
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class App extends Component {
     return (
       <div className="item2">
         <Title title={"Art"}/>
+        <Tabs/>
       </div>
     );
   }
@@ -39,7 +41,7 @@ class App extends Component {
     return (
       <div className="item3">
         <Title title={this.state.footer}/>
-        <Navbar></Navbar>
+        <Navbar/>
       </div>
     );
   }
