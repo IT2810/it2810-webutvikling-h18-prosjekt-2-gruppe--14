@@ -11,6 +11,16 @@ class Art extends Component {
         }
     }
 
+        if (this.state.prev_text !== text || this.state.prev_version !== version) {
+            const data = await fetch("/resources/text/"+resources.text[text]+".json")
+                .then(res => res.json());
+            document.getElementById("text-container").innerText = data["quotes"][version-1];
+        }
+
+        if (this.state.prev_version !== version) {
+            this.setState({prev_version: version});
+        }
+    };
     render() {
         console.log(resources[1]);
         return (
