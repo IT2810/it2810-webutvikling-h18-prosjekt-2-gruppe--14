@@ -62,14 +62,17 @@ class Navbar extends Component {
                     <div style={this.state.sound === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 1});
-                        }}>{themes.sound[1]}</div>
+                            this.props.changeSound(1);
+                    }}>{themes.sound[1]}</div>
                         <div style={this.state.sound === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 2});
+                            this.props.changeSound(2);
                         }}>{themes.sound[2]}</div>
                         <div style={this.state.sound === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 3});
+                            this.props.changeSound(3);
                         }}>{themes.sound[3]}</div>
 
 
@@ -77,14 +80,17 @@ class Navbar extends Component {
                     <div style={this.state.text === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 1});
+                            this.props.changeText(1);
                         }}>{themes.text[1]}</div>
                         <div style={this.state.text === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 2});
+                            this.props.changeText(2);
                         }}>{themes.text[2]}</div>
                         <div style={this.state.text === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 3});
+                            this.props.changeText(3);
                         }}>{themes.text[3]}</div>
 
                 </div>
