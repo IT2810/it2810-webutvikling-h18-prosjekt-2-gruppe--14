@@ -11,6 +11,18 @@ class Art extends Component {
         }
     }
 
+        if (this.state.prev_sound !== sound || this.state.prev_version !== version) {
+            console.log("beb");
+            const path = "/resources/sound/"+resources.sound[sound]+"/"+resources.sound[sound]+version+".mp3";
+            const audio = document.getElementById("audio-container");
+
+            audio.pause();
+            audio.src = path;
+            audio.load();
+            audio.play();
+            this.setState({prev_sound: sound});
+        }
+
         if (this.state.prev_text !== text || this.state.prev_version !== version) {
             const data = await fetch("/resources/text/"+resources.text[text]+".json")
                 .then(res => res.json());
