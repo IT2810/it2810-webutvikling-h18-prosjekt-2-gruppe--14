@@ -14,7 +14,7 @@ class Navbar extends Component {
 
     //Function opening the navbar.
     openNav() {
-        document.getElementById("mySidebar").style.width = "25%";
+        document.getElementById("mySidebar").style.width = "320px";
         document.getElementById("main").style.marginLeft = "100%";
     }
 
@@ -44,14 +44,17 @@ class Navbar extends Component {
                         <div style={this.state.motive === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 1});
+                            this.props.changeMotive(1);
                         }}>{themes.motive[1]}</div>
                         <div style={this.state.motive === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 2});
+                            this.props.changeMotive(2);
                         }}>{themes.motive[2]}</div>
                         <div style={this.state.motive === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 3});
+                            this.props.changeMotive(3);
                         }}>{themes.motive[3]}</div>
 
 
