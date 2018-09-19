@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './../style/Tabs.css';
+import Art from "./Art";
 
 class Tabs extends Component {
     render() {
@@ -17,22 +18,42 @@ class Tabs extends Component {
 
                 <div id="art-1" className="tab-content">
                     <p>Enjoy the art 1</p>
-                    /* Generate art here */
+                    <Art
+                        motive={this.props.settings.motive}
+                        sound={this.props.settings.sound}
+                        text={this.props.settings.text}
+                        version={1}>
+                    </Art>
                 </div>
 
                 <div id="art-2" className="tab-content">
                     <p>Enjoy the art 2</p>
-                    /* Generate art here */
+                    <Art
+                        motive={this.props.settings.motive}
+                        sound={this.props.settings.sound}
+                        text={this.props.settings.text}
+                        version={2}>
+                    </Art>
                 </div>
 
                 <div id="art-3" className="tab-content">
                     <p>Enjoy the art 3</p>
-                    /* Generate art here */
+                    <Art
+                        motive={this.props.settings.motive}
+                        sound={this.props.settings.sound}
+                        text={this.props.settings.text}
+                        version={3}>
+                    </Art>
                 </div>
 
                 <div id="art-4" className="tab-content">
                     <p>Enjoy the art 4</p>
-                    /* Generate art here */
+                    <Art
+                        motive={this.props.settings.motive}
+                        sound={this.props.settings.sound}
+                        text={this.props.settings.text}
+                        version={4}>
+                    </Art>
                 </div>
             </div>
         );
