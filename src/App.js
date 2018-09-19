@@ -6,6 +6,7 @@ import './App.css';
 import Title from './components/Title';
 import Navbar from './components/Navbar';
 import Tabs from './components/Tabs';
+import Footer from './components/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class App extends Component {
   renderFooter() {
     return (
       <div className="item3">
-        <Title title={this.state.footer}/>
+        <Footer></Footer>
       </div>
     );
   }
@@ -84,10 +85,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="grid-container">
-          {this.renderHeader()}
-          {this.renderArt()}
-          {this.renderFooter()}
+        {this.renderHeader()}
+        <div class='outer-scratch'>
+          <div class="inner-scratch">
+            <div class="background grain"></div>
+          </div>
+
+          <div className="grid-container">
+            {this.renderArt()}
+            {this.renderFooter()}
+          </div>
         </div>
       </div>
     );
@@ -95,3 +102,5 @@ class App extends Component {
 }
 
 export default App;
+
+
