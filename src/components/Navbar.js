@@ -14,7 +14,7 @@ class Navbar extends Component {
 
     //Function opening the navbar.
     openNav() {
-        document.getElementById("mySidebar").style.width = "100%";
+        document.getElementById("mySidebar").style.width = "320px";
         document.getElementById("main").style.marginLeft = "100%";
     }
 
@@ -41,45 +41,48 @@ class Navbar extends Component {
                     this.setState({hide: true})}}>x</a>
 
                     <a >MOTIVE</a>
-                        <div style={this.state.motive==1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.motive === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 1});
+                            this.props.changeMotive(1);
                         }}>{themes.motive[1]}</div>
-                        <div style={this.state.motive==2 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.motive === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 2});
+                            this.props.changeMotive(2);
                         }}>{themes.motive[2]}</div>
-                        <div style={this.state.motive==3 ? {color: "#f1f1f1"}: {}}onClick={e => {
+                        <div style={this.state.motive === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 3});
+                            this.props.changeMotive(3);
                         }}>{themes.motive[3]}</div>
 
 
                     <a >SOUND</a>
-                    <div style={this.state.sound==1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                    <div style={this.state.sound === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 1});
                         }}>{themes.sound[1]}</div>
-                        <div style={this.state.sound==2 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.sound === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 2});
                         }}>{themes.sound[2]}</div>
-                        <div style={this.state.sound==3 ? {color: "#f1f1f1"}: {}}onClick={e => {
+                        <div style={this.state.sound === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 3});
                         }}>{themes.sound[3]}</div>
 
 
                     <a >TEXT</a>
-                    <div style={this.state.text==1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                    <div style={this.state.text === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 1});
                         }}>{themes.text[1]}</div>
-                        <div style={this.state.text==2 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.text === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 2});
                         }}>{themes.text[2]}</div>
-                        <div style={this.state.text==3 ? {color: "#f1f1f1"}: {}}onClick={e => {
+                        <div style={this.state.text === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 3});
                         }}>{themes.text[3]}</div>
@@ -89,6 +92,7 @@ class Navbar extends Component {
         );
     }
 }
+
 //Setting options. To edit or add settings - insert here:
 const themes = {
     text: {
@@ -107,6 +111,6 @@ const themes = {
         3: "Jazz",
     }
 
-}
+};
 
 export default Navbar;

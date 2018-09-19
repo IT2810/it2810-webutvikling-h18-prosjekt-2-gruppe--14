@@ -11,6 +11,9 @@
 }
 .item3 {
   grid-area: footer;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 .grid-container {
   display: grid;
