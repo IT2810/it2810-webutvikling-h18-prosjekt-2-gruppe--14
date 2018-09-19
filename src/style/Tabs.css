@@ -1,0 +1,34 @@
+.tab-container {
+    position: absolute;
+    z-index: 10; /* Only for testing, TODO: Fix positioning on all elements*/
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    background-color: #818181;
+    border: 2px solid black;
+    margin: 3px;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    outline: 0;
+}
+
+.tab:hover {
+    background-color: white;
+}
+
+.tab.active {
+    background-color: white;
+    border-color: goldenrod;
+}
+
+.tab-content {
+    display: none;
+    padding: 10px 10px;
+    position: relative;
+    
+}
