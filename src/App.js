@@ -33,7 +33,7 @@ class App extends Component {
                 text: this.state.settings.text,
             }
         });
-    }
+    };
 
     //Function that gets passed down to the Navbar - changing sound setting.
     changeSound = (value) => {
@@ -44,7 +44,7 @@ class App extends Component {
                 text: this.state.settings.text,
             }
         });
-    }
+    };
 
     //Function that gets passed down to the Navbar - changing text setting.
     changeText = (value) => {
@@ -55,7 +55,7 @@ class App extends Component {
                 text: value,
             }
         });
-    }
+    };
 
     //Function rendering the webpage header.
     renderHeader() {
@@ -75,14 +75,11 @@ class App extends Component {
         );
     }
 
-
-
-
     //Function rendering the webpage footer.
     renderFooter() {
         return (
             <div className="item3">
-                <Footer></Footer>
+                <Footer/>
             </div>
         );
     }
@@ -91,18 +88,12 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <div class='outer-scratch'>
-                    <div class="inner-scratch">
-                        <div class="background grain"></div>
-                    </div>
-
                     <div className="grid-container">
                         {this.renderHeader()}
 
                         {this.renderArt()}
                         {this.renderFooter()}
                     </div>
-                </div>
             </div>
         );
     }
