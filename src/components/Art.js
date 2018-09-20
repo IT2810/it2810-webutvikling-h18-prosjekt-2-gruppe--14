@@ -8,11 +8,26 @@ class Art extends Component {
             prev_sound: 1,
             prev_text: 1,
             prev_version: 1,
+            source_motive: "",
+            source_audio: "",
+            source_text: "",
+
         }
     }
 
+    generateArt(motive, sound, text, version) {
+        if (this.state.prev_motive !== motive || this.state.prev_version !== version) {
+            const artContainer = document.getElementById("motive-container");
+            artContainer.innerHTML = "";
+            const path = "/resources/motive/"+resources.motive[motive][version]+".svg";
+
+            fetch(path)
+                .then(response => response.text())
+                .then(svg => artContainer.insertAdjacentHTML("afterbegin", svg));
+            this.setState({prev_motive: motive});
+        }
+
         if (this.state.prev_sound !== sound || this.state.prev_version !== version) {
-            console.log("beb");
             const path = "/resources/sound/"+resources.sound[sound]+"/"+resources.sound[sound]+version+".mp3";
             const audio = document.getElementById("audio-container");
 
