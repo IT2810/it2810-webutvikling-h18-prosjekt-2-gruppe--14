@@ -25,7 +25,11 @@
   text-align: center;
   padding: 20px 0;
 }
-
+#motive-container {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+}
 /* ----------------------------------- */
 
 
@@ -145,7 +149,7 @@ html, body {
 
   30% {
     transform: translateX(-2%);
-        opacity: 0.09;
+    opacity: 0.09;
   }
 
   40% {
@@ -227,4 +231,3 @@ html, body {
 
 
 /* ------------------------ */
-

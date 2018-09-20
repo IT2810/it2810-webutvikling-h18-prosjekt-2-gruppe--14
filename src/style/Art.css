@@ -1,0 +1,63 @@
+
+
+.motive {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.text {
+    font-size: 50px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+
+    font-weight: bold;
+    background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+    padding-top: 100px;
+
+}
+
+.audio{
+    position: fixed;
+    top: 85%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+
+}
+
+/* The smallest iphone is 320px wide - our design meets the requirements down to that width */
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 560px) {
+    .text {font-size: 20px;}
+}
+
+@media screen and (max-width: 900px) {
+    .text {font-size: 30px;}
+}
+
+@media screen and (max-width: 410px) {
+    .audio{
+        /* Adapting position regarding navbar on smaller devices */
+        margin-left:42px;
+    }
+
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 890px) {
+    .text {font-size: 16px;}
+}

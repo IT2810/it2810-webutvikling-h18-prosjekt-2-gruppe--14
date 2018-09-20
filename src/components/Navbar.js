@@ -32,11 +32,11 @@ class Navbar extends Component {
         return (
             <div id="main">
                 <div id="mySidebar" className="sidebar">
-                    <nav className={"container"} 
-                        onClick={e => {
-                            this.handleNav();
-                            e.preventDefault();
-                            this.setState({hide: !this.state.hide})}}
+                    <nav className={"container"}
+                         onClick={e => {
+                             this.handleNav();
+                             e.preventDefault();
+                             this.setState({hide: !this.state.hide})}}
                     >
                         <nav class={!this.state.hide? "bar1change" : "bar1"}></nav>
                         <nav class={!this.state.hide? "bar2change" : "bar2"}></nav>
@@ -45,7 +45,7 @@ class Navbar extends Component {
 
                     {!this.state.hide? <div>
 
-                    <a >MOTIVE</a>
+                        <a >MOTIVE</a>
                         <div style={this.state.motive === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 1});
@@ -63,12 +63,12 @@ class Navbar extends Component {
                         }}>{themes.motive[3]}</div>
 
 
-                    <a >SOUND</a>
-                    <div style={this.state.sound === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <a >SOUND</a>
+                        <div style={this.state.sound === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 1});
                             this.props.changeSound(1);
-                    }}>{themes.sound[1]}</div>
+                        }}>{themes.sound[1]}</div>
                         <div style={this.state.sound === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 2});
@@ -81,8 +81,8 @@ class Navbar extends Component {
                         }}>{themes.sound[3]}</div>
 
 
-                    <a >TEXT</a>
-                    <div style={this.state.text === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <a >TEXT</a>
+                        <div style={this.state.text === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 1});
                             this.props.changeText(1);
@@ -96,7 +96,7 @@ class Navbar extends Component {
                             e.preventDefault();
                             this.setState({text: 3});
                             this.props.changeText(3);
-                    }}>{themes.text[3]}</div> </div> : ""}
+                        }}>{themes.text[3]}</div> </div> : ""}
 
                 </div>
             </div>
@@ -110,7 +110,7 @@ const themes = {
         1: "The Lord of the Rings",
         2: "Inception",
         3: "Star Wars",
-    }, 
+    },
     motive: {
         1: "Vehicles",
         2: "Nature",
