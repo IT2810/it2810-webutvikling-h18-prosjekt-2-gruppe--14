@@ -39,55 +39,51 @@ class Art extends Component {
         }
 
         if (this.state.prev_text !== text || this.state.prev_version !== version) {
-            const data = await fetch("/resources/text/"+resources.text[text]+".json")
-                .then(res => res.json());
-            document.getElementById("text-container").innerText = data["quotes"][version-1];
+            fetch("/resources/text/"+resources.text[text]+".json")
+                .then(res => res.json())
+                .then(json => {
+                    document.getElementById("text-container").innerText = json["quotes"][version-1];
+                });
+            this.setState({prev_text: text});
+
         }
 
         if (this.state.prev_version !== version) {
             this.setState({prev_version: version});
         }
     };
-    render() {
-        console.log(resources[1]);
-        return (
-            <div>
-                <h1>Motive: {this.props.motive}</h1>
-                <h1>Sound: {this.props.sound}</h1>
-                <h1>Text: {this.props.text}</h1>
-                <h1>Version: {this.props.version}</h1>
-            </div>
-        )
-    }
-}
 
-function generateArt(motive, sound, text, version) {
+
+    render() {
+        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.settings.version);
+        return null;
+    }
 }
 
 const resources = {
     text: {
-        1:"inception",
-        2:"lotr",
+        1:"lotr",
+        2:"inception",
         3:"starwars"
     },
     motive: {
-        "vehicle": {
-            1: "ambulance",
-            2: "bus",
-            3: "car",
-            4: "plane"
+        1: {
+            1: "vehicle/ambulance",
+            2: "vehicle/bus",
+            3: "vehicle/car",
+            4: "vehicle/plane"
         },
-        "nature": {
-            1: "beach",
-            2: "forest",
-            3: "grassland",
-            4: "river"
+        2: {
+            1: "nature/beach",
+            2: "nature/forest",
+            3: "nature/grassland",
+            4: "nature/river"
         },
-        "animal": {
-            1: "cat",
-            2: "crab",
-            3: "dog",
-            4: "owl"
+        3: {
+            1: "animal/cat",
+            2: "animal/crab",
+            3: "animal/dog",
+            4: "animal/owl"
         },
     },
     sound: {
