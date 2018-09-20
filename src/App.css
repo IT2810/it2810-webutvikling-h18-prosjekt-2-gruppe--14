@@ -25,6 +25,10 @@
   text-align: center;
   padding: 20px 0;
 }
-
+#motive-container {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+}
 /* ----------------------------------- */
 

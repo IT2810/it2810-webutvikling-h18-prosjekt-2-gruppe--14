@@ -86,7 +86,7 @@ class App extends Component {
             <div className="item2">
                 <Tabs settings={this.state.settings} changeVersion={this.changeVersion}/>
                 <div id={"motive-container"}></div>
-                <p id={"text-container"}></p>
+                <h1 id={"text-container"}></h1>
                 <audio controls id={"audio-container"} type="audio/mpeg"></audio>
             </div>
         );
