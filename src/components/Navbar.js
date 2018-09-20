@@ -12,33 +12,38 @@ class Navbar extends Component {
         }
     }
 
-    //Function opening the navbar.
-    openNav() {
-        document.getElementById("mySidebar").style.width = "320px";
-        document.getElementById("main").style.marginLeft = "100%";
+    //Function opening and closing the navbar by changing width. 
+    handleNav() {
+        if(this.state.hide) {
+            document.getElementById("mySidebar").style.width = "320px";
+        } else {
+            document.getElementById("mySidebar").style.width = "60px";
+        }
     }
 
-    //Function closing the navbar.
-    closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
+    //Function that runs immideatly after the component (Navbar) renders -> Making the navbar visible.
+    componentDidMount() {
+        document.getElementById("mySidebar").style.width = "60px";
     }
 
-    //Function rendering the navbar and listening for changes in settings. The settings are controlled by the components state. 
+    //Function rendering the navbar and listening for changes in settings. 
+    //The settings are controlled by the components state. The settings are also passed upwards to App.js by calling functions recieved through props from App.js. 
     render() {
         return (
-            <div id="main">{this.state.hide ? <button className={"openbtn"} onClick={ e => {
-                this.openNav();
-                e.preventDefault();
-                this.setState({hide: false})}}>
-               {this.state.hide ? "☰" : ""} 
-            </button> : ""}
-                
+            <div id="main">
                 <div id="mySidebar" className="sidebar">
-                    <a  className="closebtn" onClick={e => {
-                    this.closeNav();
-                    e.preventDefault();
-                    this.setState({hide: true})}}>x</a>
+                    <nav className={"container"} 
+                        onClick={e => {
+                            this.handleNav();
+                            e.preventDefault();
+                            this.setState({hide: !this.state.hide})}}
+                    >
+                        <nav class={!this.state.hide? "bar1change" : "bar1"}></nav>
+                        <nav class={!this.state.hide? "bar2change" : "bar2"}></nav>
+                        <nav class={!this.state.hide? "bar3change" : "bar3"}></nav>
+                    </nav>
+
+                    {!this.state.hide? <div>
 
                     <a >MOTIVE</a>
                         <div style={this.state.motive === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
@@ -91,7 +96,7 @@ class Navbar extends Component {
                             e.preventDefault();
                             this.setState({text: 3});
                             this.props.changeText(3);
-                        }}>{themes.text[3]}</div>
+                    }}>{themes.text[3]}</div> </div> : ""}
 
                 </div>
             </div>

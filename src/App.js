@@ -6,6 +6,7 @@ import './App.css';
 import Title from './components/Title';
 import Navbar from './components/Navbar';
 import Tabs from './components/Tabs';
+import Footer from './components/Footer';
 
 class App extends Component {
     constructor(props) {
@@ -80,7 +81,7 @@ class App extends Component {
         );
     }
 
-    //Function rendering the art based on user settings.
+   //Function rendering the art based on user settings.
     renderArt() {
         return (
             <div className="item2">
@@ -92,27 +93,39 @@ class App extends Component {
         );
     }
 
-    //Function rendering the webpage footer.
-    renderFooter() {
-        return (
-            <div className="item3">
-                <Title title={this.state.footer}/>
-            </div>
-        );
-    }
 
-    //Function rendering the application.
-    render() {
-        return (
-            <div className="App">
-                <div className="grid-container">
-                    {this.renderHeader()}
-                    {this.renderArt()}
-                    {this.renderFooter()}
-                </div>
-            </div>
-        );
-    }
+
+
+  //Function rendering the webpage footer.
+  renderFooter() {
+    return (
+      <div className="item3">
+        <Footer></Footer>
+      </div>
+    );
+  }
+
+  //Function rendering the application. 
+  render() {
+    return (
+      <div className="App">
+        {this.renderHeader()}
+        <div class='outer-scratch'>
+          <div class="inner-scratch">
+            <div class="background grain"></div>
+          </div>
+
+          <div className="grid-container">
+            {this.renderArt()}
+            {this.renderFooter()}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
 }
 
 export default App;
+
+
