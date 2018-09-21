@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../style/Art.css';
+import {isMobile} from "react-device-detect";
 
 class Art extends Component {
     constructor(props) {
@@ -80,9 +81,15 @@ class Art extends Component {
         audioController.pause();
         audioController.src = url;
         audioController.load();
-        audioController.play();
 
         this.setState({prevSound: audio});
+    }
+
+    playAudio() {
+        if (!isMobile) { // Do not play audio at mobile phones, as multiple phones does not support auto playing of audio
+            const audioController = document.getElementById("audio-container");
+            audioController.play();
+        }
     }
 
     /**
@@ -185,7 +192,7 @@ class Art extends Component {
                 <div id="text-container" className="text">
                 </div>
                 <div className="audio">
-                    <audio id={"audio-container"} type="audio/mpeg"></audio>
+                    <audio id={"audio-container"} type="audio/mpeg" onCanPlay={this.playAudio}></audio>
                 </div>
             </div>
         );
