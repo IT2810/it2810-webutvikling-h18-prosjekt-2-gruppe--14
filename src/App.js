@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-
-
-import Title from './components/Title';
 import Art from './components/Art';
 import Navbar from './components/Navbar';
 import Tabs from './components/Tabs';
@@ -63,7 +60,7 @@ class App extends Component {
                 art: value,
             }
         );
-    }
+    };
 
     //Function rendering the webpage header.
     renderHeader() {

@@ -40,9 +40,9 @@ class Navbar extends Component {
                              this.setState({hide: !this.state.hide})
                          }}
                     >
-                        <nav class={!this.state.hide ? "bar1change" : "bar1"}></nav>
-                        <nav class={!this.state.hide ? "bar2change" : "bar2"}></nav>
-                        <nav class={!this.state.hide ? "bar3change" : "bar3"}></nav>
+                        <nav className={!this.state.hide ? "bar1change" : "bar1"}/>
+                        <nav className={!this.state.hide ? "bar2change" : "bar2"}/>
+                        <nav className={!this.state.hide ? "bar3change" : "bar3"}/>
                     </nav>
 
                     {!this.state.hide ? <div>
