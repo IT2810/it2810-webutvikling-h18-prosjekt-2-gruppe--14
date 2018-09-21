@@ -9,45 +9,80 @@ class Art extends Component {
             prev_sound: 1,
             prev_text: 1,
             prev_version: 1,
-            source_motive: "",
-            source_audio: "",
-            source_text: "",
+            cache: [],
+            currently_in_view: {
+                motive: "",
+                text: ""
+            }
+        }
+    }
+
+    async generateMotive(motive, version) {
+        const url = "/resources/motive/" + resources.motive[motive][version] + ".svg";
+        if (!(url in this.getCache()))
+            await this.getDataAndCache(url, false);
+        const data = this.getCache()[url];
+
+        let currently_in_view = this.getCurrentlyInView();
+        currently_in_view["motive"] = data;
+        const element = this.stringToElement(data)
+        this.addMotive(element);
+        
+        this.setState({currently_in_view: currently_in_view});
+    }
+
+    async generateText(text, version) {
+        const url = "/resources/text/" + resources.text[text] + ".json";
+        if (!(url in this.getCache()))
+            await this.getDataAndCache(url, true);
+
+        const cache = this.getCache()
+        const retrieved_text = cache[url]["quotes"][version - 1];
+        const currently_in_view = this.getCurrentlyInView();
+        currently_in_view["text"] = retrieved_text;
+
+        this.setState({currently_in_view: currently_in_view});
+    }
+
+    generateAudio(audio, version) {
+        const url = "/resources/sound/" + resources.sound[audio] + "/" + resources.sound[audio] + version + ".mp3";
+        const audio_controller = document.getElementById("audio-container");
+
+        audio_controller.pause();
+        audio_controller.src = url;
+        audio_controller.load();
+        audio_controller.play();
+
+        this.setState({prev_sound: audio});
+    }
+
+    async getDataAndCache(url, json) {
+        let cache = this.getCache();
+        if (!(url in cache)) {
+            console.log("Adding url: '" + url + "' to cache")
+            let cache = this.state.cache;
+            cache[url] = "";
+            await fetch(url)
+                .then(response => json ? response.json() : response.text())
+                .then(response => cache[url] = response);
+            this.setState({cache: cache});
         }
     }
 
     generateArt(motive, sound, text, version) {
-        console.log(this.props.settings);
-        console.log(this.props.art);
         if (this.state.prev_motive !== motive || this.state.prev_version !== version) {
-            const artContainer = document.getElementById("motive-container");
-            const path = "/resources/motive/"+resources.motive[motive][version]+".svg";
-            fetch(path)
-                .then(response => response.text())
-                .then(svg => {
-                    artContainer.innerHTML = "";
-                    artContainer.insertAdjacentHTML("afterbegin", svg)});
             this.setState({prev_motive: motive});
+            this.generateMotive(motive, version);
         }
 
         if (this.state.prev_sound !== sound || this.state.prev_version !== version) {
-            const path = "/resources/sound/"+resources.sound[sound]+"/"+resources.sound[sound]+version+".mp3";
-            const audio = document.getElementById("audio-container");
-
-            audio.pause();
-            audio.src = path;
-            audio.load();
-            audio.play();
-            this.setState({prev_sound: sound});
+            this.generateAudio(sound, version);
+            this.setState({prev_sound: sound})
         }
 
         if (this.state.prev_text !== text || this.state.prev_version !== version) {
-            fetch("/resources/text/"+resources.text[text]+".json")
-                .then(res => res.json())
-                .then(json => {
-                    document.getElementById("text-container").innerText = json["quotes"][version-1];
-                });
+            this.generateText(text, version);
             this.setState({prev_text: text});
-
         }
 
         if (this.state.prev_version !== version) {
@@ -55,30 +90,48 @@ class Art extends Component {
         }
     };
 
-    componentDidMount() {
+    getCache() {
+        return Object.assign({}, this.state.cache);
+    }
 
+    getCurrentlyInView() {
+        return Object.assign({}, this.state.currently_in_view);
+    }
+
+    stringToElement(string) {
+        let element = document.createElement('div')
+        element.innerHTML = string;
+        return element;
+    }
+
+    addMotive(element) {
+        let motiveContainer = document.getElementById("motive-container");
+        motiveContainer.innerHTML = "";
+        motiveContainer.insertAdjacentElement("afterbegin", element);
     }
 
     render() {
         this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
         return (
             <div className="artcontainer">
-                <div id={"motive-container"} className="motive"></div>
-                <h1 id={"text-container"} className="text"></h1>
+                <div id={"motive-container"} className="motive">
+                </div>
+                <div id="text-container" className="text">
+                    <p>{this.state.currently_in_view["text"]}</p>
+                </div>
                 <div className="audio">
-                    <audio controls id={"audio-container"} type="audio/mpeg" ></audio>
+                    <audio id={"audio-container"} type="audio/mpeg"></audio>
                 </div>
             </div>
-
         );
     }
 }
 
 const resources = {
     text: {
-        1:"lotr",
-        2:"inception",
-        3:"starwars"
+        1: "lotr",
+        2: "inception",
+        3: "starwars"
     },
     motive: {
         1: {
