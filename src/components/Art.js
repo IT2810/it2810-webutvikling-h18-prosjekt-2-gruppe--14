@@ -173,8 +173,11 @@ class Art extends Component {
         this.generateAudio(1, 1);
     }
 
+    componentDidUpdate() {
+        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
+    }
+
     render() {
-        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art); // Function takes care of elements that should be updated
         return (
             <div className="artcontainer">
                 <div id={"motive-container"} className="motive">
