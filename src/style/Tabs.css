@@ -1,0 +1,55 @@
+.tab-container {
+    position: absolute;
+    z-index: 10;
+    width: 15vmax;
+    height: 40vh;
+    min-width: 60px;
+}
+
+.tab {
+    width: 11vmax;
+    min-width: 50px;
+    height: 9vmax;
+    min-height: 50px;
+    display: flex;
+    background-color: #818181;
+    border: 2px solid black;
+    margin: 3px;
+    color: black;
+    text-align: justify;
+    text-indent: 3.6vmax;
+    font-size: 5vw;
+    cursor: pointer;
+    outline: 0;
+    border-radius: 3%;
+}
+
+.tab:hover, .tabactive:hover {
+    background-color: white;
+}
+
+.tabactive {
+    width: 11vmax;
+    min-width: 50px;
+    height: 9vmax;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    border: 2px solid goldenrod;
+    margin: 3px;
+    color: black;
+    text-indent: 3.6vmax;
+    font-size: 5vw;
+    cursor: pointer;
+    outline: 0;
+    background-color: white;
+    border-radius: 3%;
+
+}
+
+.tab-content {
+    display: none;
+    padding: 10px 10px;
+    position: relative;
+}
+

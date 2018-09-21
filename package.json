@@ -2,7 +2,9 @@
   "name": "it2810-webutvikling-h18-prosjekt-2-gruppe--14",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://it2810-14.idi.ntnu.no/prosjekt2",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-scripts": "1.1.5"

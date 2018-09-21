@@ -1,0 +1,51 @@
+.art-container {
+    display: table;
+    width: 100%;
+}
+
+#motive-container {
+    width: 30vh;
+    display: block;
+    margin: 0 auto;
+    
+}
+
+.motive {
+    width: 10vw;
+    padding-left: 15vmax;
+    padding-right: 9vmax;
+    vertical-align: top;
+}
+
+.text {
+    padding-left: 15vmax;
+    padding-right: 10vmax;
+    font-size: 4vh;
+    color: goldenrod;
+}
+
+@media screen and (orientation: landscape) {
+    .text {
+        font-size: 3.5vw;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    #motive-container {
+        width: 20vw;
+    }
+}
+
+
+
+@media screen and (max-height: 720px) {
+    .text {
+        font-size: 3vh;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .text {
+        font-size: 3vh;
+    }
+}

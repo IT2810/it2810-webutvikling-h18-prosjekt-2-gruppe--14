@@ -1,0 +1,122 @@
+.sidebar {
+  height: 100%;
+  width: 10vmax;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  opacity: 0.8;
+}
+
+.sidebar a {
+  padding-left: 11vw;
+  padding-bottom: 2vh;
+  text-decoration: none;
+  font-size: 5vh;
+  color: goldenrod;
+  display: block;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.sidebar div:hover {
+  color: #f1f1f1;
+}
+
+.sidebar div {
+  padding-left: 11vw;
+  padding-bottom: 2vh;
+  text-decoration: none;
+  font-size: 3vh;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 50%;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+
+.container {
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 4vh;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color:white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.bar1change {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+.bar2change{
+  opacity: 0;
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+
+}
+.bar3change {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
