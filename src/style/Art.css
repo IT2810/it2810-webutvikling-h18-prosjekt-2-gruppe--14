@@ -11,14 +11,14 @@
 
 .motive {
     width: 10vw;
-    padding-left: 17vw;
-    padding-right: 8vw;
+    padding-left: 17vmax;
+    padding-right: 8vmax;
     vertical-align: top;
 }
 
 .text {
-    padding-left: 17vw;
-    padding-right: 8vw;
+    padding-left: 17vmax;
+    padding-right: 8vmax;
     font-size: 4vh;
     font-weight: bold;
     background-color: #666666;
