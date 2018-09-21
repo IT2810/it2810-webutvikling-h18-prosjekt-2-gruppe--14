@@ -18,16 +18,16 @@ class Art extends Component {
     }
 
     async generateMotive(motive, version) {
-        const url = "/resources/motive/"+resources.motive[motive][version]+".svg";
+        const url = "/resources/motive/" + resources.motive[motive][version] + ".svg";
         if (!(url in this.getCache()))
             await this.getDataAndCache(url, false);
         const data = this.getCache()[url];
 
         let currently_in_view = this.getCurrentlyInView();
         currently_in_view["motive"] = data;
-
         const element = this.stringToElement(data)
         this.addMotive(element);
+        
         this.setState({currently_in_view: currently_in_view});
     }
 
@@ -40,6 +40,7 @@ class Art extends Component {
         const retrieved_text = cache[url]["quotes"][version - 1];
         const currently_in_view = this.getCurrentlyInView();
         currently_in_view["text"] = retrieved_text;
+
         this.setState({currently_in_view: currently_in_view});
     }
 
@@ -58,7 +59,7 @@ class Art extends Component {
     async getDataAndCache(url, json) {
         let cache = this.getCache();
         if (!(url in cache)) {
-            console.log("Adding url: '"+url+"' to cache")
+            console.log("Adding url: '" + url + "' to cache")
             let cache = this.state.cache;
             cache[url] = "";
             await fetch(url)
@@ -105,11 +106,10 @@ class Art extends Component {
 
     addMotive(element) {
         let motiveContainer = document.getElementById("motive-container");
-        if (motiveContainer.innerHTML != "")
-            motiveContainer.innerHTML = "";
+        motiveContainer.innerHTML = "";
         motiveContainer.insertAdjacentElement("afterbegin", element);
     }
-    
+
     render() {
         this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
         return (
