@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './../style/Navbar.css';
 
 class Navbar extends Component {
@@ -12,18 +12,19 @@ class Navbar extends Component {
         };
     }
 
-    //Function opening and closing the navbar by changing width. 
+    /**
+     * Function opening and closing the navbar by changing width.
+     */
     handleNav() {
-        if(this.state.hide) {
+        if (this.state.hide) {
             document.getElementById("mySidebar").style.width = "50vmax";
         } else {
             document.getElementById("mySidebar").style.width = "12vmax";
         }
     }
 
-    //Function that runs immideatly after the component (Navbar) renders -> Making the navbar visible.
     componentDidMount() {
-        document.getElementById("mySidebar").style.width = "12vmax";
+        document.getElementById("mySidebar").style.width = "12vmax"; // Makes the navbar visible.
     }
 
     //Function rendering the navbar and listening for changes in settings. 
@@ -36,67 +37,69 @@ class Navbar extends Component {
                          onClick={e => {
                              this.handleNav();
                              e.preventDefault();
-                             this.setState({hide: !this.state.hide})}}
+                             this.setState({hide: !this.state.hide})
+                         }}
                     >
-                        <nav class={!this.state.hide? "bar1change" : "bar1"}></nav>
-                        <nav class={!this.state.hide? "bar2change" : "bar2"}></nav>
-                        <nav class={!this.state.hide? "bar3change" : "bar3"}></nav>
+                        <nav class={!this.state.hide ? "bar1change" : "bar1"}></nav>
+                        <nav class={!this.state.hide ? "bar2change" : "bar2"}></nav>
+                        <nav class={!this.state.hide ? "bar3change" : "bar3"}></nav>
                     </nav>
 
-                    {!this.state.hide? <div>
+                    {!this.state.hide ? <div>
 
-                        <a >MOTIVE</a>
-                        <div style={this.state.motive === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <a>MOTIVE</a>
+                        <div style={this.state.motive === 1 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 1});
                             this.props.changeMotive(1);
                         }}>{themes.motive[1]}</div>
-                        <div style={this.state.motive === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.motive === 2 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 2});
                             this.props.changeMotive(2);
                         }}>{themes.motive[2]}</div>
-                        <div style={this.state.motive === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.motive === 3 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({motive: 3});
                             this.props.changeMotive(3);
                         }}>{themes.motive[3]}</div>
 
 
-                        <a >SOUND</a>
-                        <div style={this.state.sound === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <a>SOUND</a>
+                        <div style={this.state.sound === 1 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 1});
                             this.props.changeSound(1);
                         }}>{themes.sound[1]}</div>
-                        <div style={this.state.sound === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.sound === 2 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 2});
                             this.props.changeSound(2);
                         }}>{themes.sound[2]}</div>
-                        <div style={this.state.sound === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.sound === 3 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({sound: 3});
                             this.props.changeSound(3);
                         }}>{themes.sound[3]}</div>
 
 
-                        <a >TEXT</a>
-                        <div style={this.state.text === 1 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <a>TEXT</a>
+                        <div style={this.state.text === 1 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 1});
                             this.props.changeText(1);
                         }}>{themes.text[1]}</div>
-                        <div style={this.state.text === 2 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.text === 2 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 2});
                             this.props.changeText(2);
                         }}>{themes.text[2]}</div>
-                        <div style={this.state.text === 3 ? {color: "#f1f1f1"}: {}} onClick={e => {
+                        <div style={this.state.text === 3 ? {color: "#f1f1f1"} : {}} onClick={e => {
                             e.preventDefault();
                             this.setState({text: 3});
                             this.props.changeText(3);
-                        }}>{themes.text[3]}</div> </div> : ""}
+                        }}>{themes.text[3]}</div>
+                    </div> : ""}
 
                 </div>
             </div>

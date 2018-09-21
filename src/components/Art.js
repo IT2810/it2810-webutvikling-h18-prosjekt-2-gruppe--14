@@ -10,8 +10,8 @@ class Art extends Component {
             prevText: 1,
             prevVersion: 1,
             firstViewing: true,
-            cache: [], //Contains all cached elements
-            currentlyInView: { //Contains data about which motive and text that should be shown
+            cache: [], // Contains all cached elements
+            currentlyInView: { // Contains data about which motive and text that should be shown
                 motive: "",
                 text: ""
             }
@@ -27,13 +27,16 @@ class Art extends Component {
      */
     async generateMotive(motive, version) {
         const url = "/resources/motive/" + resources.motive[motive][version] + ".svg";
-        if (!(url in this.getCache()))
+        const cache = this.getCache();
+
+        if (!(url in cache)) // If the URL is not in the cache, add it.
             await this.cacheUrlAndData(url, false);
-        const data = this.getCache()[url]; //Index cache on URL to get cached data
+        const data = cache[url]; // Index cache on URL to get cached data
 
         let currentlyInView = this.getCurrentlyInView();
-        currentlyInView["motive"] = data; //Update value of motive that should be viewed
-        const element = this.stringToElement(data); //Returns actual HTML element. The "data" constant, cannot be used directly
+        currentlyInView["motive"] = data; // Update value of motive that should be viewed
+
+        const element = this.stringToElement(data); // Returns actual HTML element. The "data" constant, cannot be used directly
         this.addElement(element, "motive-container");
 
         this.setState({currentlyInView: currentlyInView});
@@ -47,15 +50,17 @@ class Art extends Component {
      */
     async generateText(text, version) {
         const url = "/resources/text/" + resources.text[text] + ".json";
-        if (!(url in this.getCache())) //If the URL is not in the cache, add it.
-            await this.cacheUrlAndData(url, true); //Text is JSON => bool is true
+        const cache = this.getCache();
 
-        const retrievedText = this.getCache()[url]["quotes"][version - 1]; //Index on url, which is a JSON file containing "movies" and "quotes". Index on "quotes" which is 0-indexed
-        const currentlyInView = this.getCurrentlyInView();
-        currentlyInView["text"] = retrievedText; //Update value of text that should be viewed
+        if (!(url in cache)) // If the URL is not in the cache, add it.
+            await this.cacheUrlAndData(url, true); // Text is JSON => bool is true
+        const data = cache[url]["quotes"][version - 1]; // Index on url, which is a JSON file containing "movies" and "quotes". Index on "quotes" which is 0-indexed
+
+        let currentlyInView = this.getCurrentlyInView();
+        currentlyInView["text"] = data; // Update value of text that should be viewed
 
         const textElement = document.createElement("p");
-        textElement.innerHTML = retrievedText;
+        textElement.innerHTML = data;
         this.addElement(textElement, "text-container");
 
         this.setState({currentlyInView: currentlyInView});
@@ -87,12 +92,12 @@ class Art extends Component {
     async cacheUrlAndData(url, json) {
         let cache = this.getCache();
         if (!(url in cache)) {
-            console.log("Adding url: '" + url + "' to cache")
             let cache = this.state.cache;
             cache[url] = "";
-            await fetch(url) //Fetch URL -> Parse correctly -> Add it to the cache with the URL as index
+            await fetch(url) // Fetch URL -> Parse correctly -> Add it to the cache with the URL as index
                 .then(response => json ? response.json() : response.text())
                 .then(response => cache[url] = response);
+
             this.setState({cache: cache});
         }
     }
@@ -105,7 +110,7 @@ class Art extends Component {
      * @param version {Number} (Integer) Version of art to be generated
      */
     generateArt(motive, sound, text, version) {
-        if (this.state.prevMotive !== motive || this.state.prevVersion !== version) { //Change if version or art piece has changed
+        if (this.state.prevMotive !== motive || this.state.prevVersion !== version) { // Change if version or art piece has changed
             this.generateMotive(motive, version);
             this.setState({prevMotive: motive});
         }
@@ -159,18 +164,15 @@ class Art extends Component {
         motiveContainer.insertAdjacentElement("afterbegin", element);
     }
 
-
+    // Load art at first viewing
     componentDidMount() {
-        if (this.state.firstViewing) { //Only in use to load art in at first viewing
-            this.setState({firstViewing: false});
-            this.generateText(1, 1);
-            this.generateMotive(1, 1);
-            this.generateAudio(1, 1);
-        }
+        this.generateText(1, 1);
+        this.generateMotive(1, 1);
+        this.generateAudio(1, 1);
     }
 
     render() {
-        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art); //Function takes care of elements that should be updated
+        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art); // Function takes care of elements that should be updated
         return (
             <div className="artcontainer">
                 <div id={"motive-container"} className="motive">
