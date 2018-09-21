@@ -5,103 +5,142 @@ class Art extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            prev_motive: 1,
-            prev_sound: 1,
-            prev_text: 1,
-            prev_version: 1,
-            isLoaded: false,
-            cache: [],
-            currently_in_view: {
+            prevMotive: 1,
+            prevSound: 1,
+            prevText: 1,
+            prevVersion: 1,
+            firstViewing: true,
+            cache: [], //Contains all cached elements
+            currentlyInView: { //Contains data about which motive and text that should be shown
                 motive: "",
                 text: ""
             }
-            
+
         }
     }
 
+    /**
+     * Generates a motive from cache. Loads motive into cache if text not in cache
+     * @param motive {Number} (Integer) Motive index in {@link reference}  that should be generated
+     * @param version {Number} (Integer) Version that should be generated
+     * @returns {Promise<void>}
+     */
     async generateMotive(motive, version) {
         const url = "/resources/motive/" + resources.motive[motive][version] + ".svg";
         if (!(url in this.getCache()))
-            await this.getDataAndCache(url, false);
-        const data = this.getCache()[url];
+            await this.cacheUrlAndData(url, false);
+        const data = this.getCache()[url]; //Index cache on URL to get cached data
 
-        let currently_in_view = this.getCurrentlyInView();
-        currently_in_view["motive"] = data;
-        const element = this.stringToElement(data)
+        let currentlyInView = this.getCurrentlyInView();
+        currentlyInView["motive"] = data; //Update value of motive that should be viewed
+        const element = this.stringToElement(data); //Returns actual HTML element. The "data" constant, cannot be used directly
         this.addElement(element, "motive-container");
-        
-        this.setState({currently_in_view: currently_in_view});
+
+        this.setState({currentlyInView: currentlyInView});
     }
 
+    /**
+     * Generates a text from cache. Loads text into cache if text not in cache
+     * @param text {Number} (Integer) Text index in {@link reference} that should be generated
+     * @param version {Number} (Integer) Version that should be generated
+     * @returns {Promise<void>}
+     */
     async generateText(text, version) {
         const url = "/resources/text/" + resources.text[text] + ".json";
-        if (!(url in this.getCache()))
-            await this.getDataAndCache(url, true);
+        if (!(url in this.getCache())) //If the URL is not in the cache, add it.
+            await this.cacheUrlAndData(url, true); //Text is JSON => bool is true
 
-        const retrieved_text = this.getCache()[url]["quotes"][version - 1];
-        const currently_in_view = this.getCurrentlyInView();
-        currently_in_view["text"] = retrieved_text;
+        const retrievedText = this.getCache()[url]["quotes"][version - 1]; //Index on url, which is a JSON file containing "movies" and "quotes". Index on "quotes" which is 0-indexed
+        const currentlyInView = this.getCurrentlyInView();
+        currentlyInView["text"] = retrievedText; //Update value of text that should be viewed
 
-        text = document.createElement("p");
-        text.innerHTML = retrieved_text;
-        this.addElement(text, "text-container");
+        const textElement = document.createElement("p");
+        textElement.innerHTML = retrievedText;
+        this.addElement(textElement, "text-container");
 
-        this.setState({currently_in_view: currently_in_view});
+        this.setState({currentlyInView: currentlyInView});
     }
 
+    /**
+     * Generate a link to an audio file and update the audio player
+     * @param audio {Number} (Integer) Audio index in {@link reference} that should be generated
+     * @param version {Number} (Integer) Version that should be generated
+     */
     generateAudio(audio, version) {
         const url = "/resources/sound/" + resources.sound[audio] + "/" + resources.sound[audio] + version + ".mp3";
-        const audio_controller = document.getElementById("audio-container");
+        const audioController = document.getElementById("audio-container");
 
-        audio_controller.pause();
-        audio_controller.src = url;
-        audio_controller.load();
-        audio_controller.play();
+        audioController.pause();
+        audioController.src = url;
+        audioController.load();
+        audioController.play();
 
-        this.setState({prev_sound: audio});
+        this.setState({prevSound: audio});
     }
 
-    async getDataAndCache(url, json) {
+    /**
+     * Gets data from files and stores it in a cache dictionary
+     * @param url {String} URL to file
+     * @param json {Boolean} Bool to decide parsing of content in URL
+     * @returns {Promise<void>}
+     */
+    async cacheUrlAndData(url, json) {
         let cache = this.getCache();
         if (!(url in cache)) {
             console.log("Adding url: '" + url + "' to cache")
             let cache = this.state.cache;
             cache[url] = "";
-            await fetch(url)
+            await fetch(url) //Fetch URL -> Parse correctly -> Add it to the cache with the URL as index
                 .then(response => json ? response.json() : response.text())
                 .then(response => cache[url] = response);
             this.setState({cache: cache});
         }
     }
 
+    /**
+     * Function that generates the whole artwork when there is a change
+     * @param motive {Number} (Integer) Index of motive
+     * @param sound {Number} (Integer) Index of sound
+     * @param text {Number} (Integer) Index of text
+     * @param version {Number} (Integer) Version of art to be generated
+     */
     generateArt(motive, sound, text, version) {
-        if (this.state.prev_motive !== motive || this.state.prev_version !== version) {
-            this.setState({prev_motive: motive});
+        if (this.state.prevMotive !== motive || this.state.prevVersion !== version) { //Change if version or art piece has changed
             this.generateMotive(motive, version);
+            this.setState({prevMotive: motive});
         }
 
-        if (this.state.prev_sound !== sound || this.state.prev_version !== version) {
+        if (this.state.prevSound !== sound || this.state.prevVersion !== version) {
             this.generateAudio(sound, version);
-            this.setState({prev_sound: sound})
+            this.setState({prevSound: sound})
         }
 
-        if (this.state.prev_text !== text || this.state.prev_version !== version) {
+        if (this.state.prevText !== text || this.state.prevVersion !== version) {
             this.generateText(text, version);
-            this.setState({prev_text: text});
+            this.setState({prevText: text});
         }
 
-        if (this.state.prev_version !== version) {
-            this.setState({prev_version: version});
+        if (this.state.prevVersion !== version) {
+            this.setState({prevVersion: version});
         }
     };
 
+    /**
+     * Returns copy of cache that is mutable
+     * @returns {{} & Array}
+     */
     getCache() {
         return Object.assign({}, this.state.cache);
     }
 
+    /**
+     * Returns copy of 'currentlyInView' that is mutable
+     * @returns {({} & Art.state.currentlyInView) | ({} & {motive, text})}
+     */
     getCurrentlyInView() {
-        return Object.assign({}, this.state.currently_in_view);
+        return Object.assign({}, this.state.currentlyInView);
     }
+
 
     stringToElement(string) {
         let element = document.createElement('div')
@@ -109,6 +148,11 @@ class Art extends Component {
         return element;
     }
 
+    /**
+     * Insert child element to a given element
+     * @param element {HTMLElement} Parent element.
+     * @param id {String} ID of parent
+     */
     addElement(element, id) {
         let motiveContainer = document.getElementById(id);
         motiveContainer.innerHTML = "";
@@ -117,16 +161,16 @@ class Art extends Component {
 
 
     componentDidMount() {
-        if (!this.state.isLoaded) {
-            this.setState({isLoaded: true});
-            this.generateText(1,1);
-            this.generateMotive(1,1);
-            this.generateAudio(1,1);
+        if (this.state.firstViewing) { //Only in use to load art in at first viewing
+            this.setState({firstViewing: false});
+            this.generateText(1, 1);
+            this.generateMotive(1, 1);
+            this.generateAudio(1, 1);
         }
     }
-    
+
     render() {
-        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
+        this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art); //Function takes care of elements that should be updated
         return (
             <div className="artcontainer">
                 <div id={"motive-container"} className="motive">
@@ -141,6 +185,7 @@ class Art extends Component {
     }
 }
 
+// Dict containing all relative paths to resources
 const resources = {
     text: {
         1: "lotr",
