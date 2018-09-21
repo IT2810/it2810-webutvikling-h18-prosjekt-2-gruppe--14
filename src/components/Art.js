@@ -27,10 +27,11 @@ class Art extends Component {
      */
     async generateMotive(motive, version) {
         const url = "/resources/motive/" + resources.motive[motive][version] + ".svg";
-        const cache = this.getCache();
+        let cache = this.getCache();
 
         if (!(url in cache)) // If the URL is not in the cache, add it.
             await this.cacheUrlAndData(url, false);
+        cache = this.getCache();
         const data = cache[url]; // Index cache on URL to get cached data
 
         let currentlyInView = this.getCurrentlyInView();
@@ -50,10 +51,11 @@ class Art extends Component {
      */
     async generateText(text, version) {
         const url = "/resources/text/" + resources.text[text] + ".json";
-        const cache = this.getCache();
+        let cache = this.getCache();
 
         if (!(url in cache)) // If the URL is not in the cache, add it.
             await this.cacheUrlAndData(url, true); // Text is JSON => bool is true
+        cache = this.getCache();
         const data = cache[url]["quotes"][version - 1]; // Index on url, which is a JSON file containing "movies" and "quotes". Index on "quotes" which is 0-indexed
 
         let currentlyInView = this.getCurrentlyInView();

@@ -5,7 +5,7 @@ class Footer extends Component {
     render() {
         return (
             <div className="cont">
-                <p className="copyright">© GROUP 14 - PROJECT 2</p>
+                <p className="copyright">Icons made by <a href={"https://www.flaticon.com/authors/freepik"} target="_blank">Freepik</a> from <a href={"https://www.flaticon.com "} target="_blank">www.flaticon.com</a></p>
             </div>
         );
     }
