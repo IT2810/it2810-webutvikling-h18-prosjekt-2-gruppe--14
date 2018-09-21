@@ -9,9 +9,6 @@ class Art extends Component {
             prev_sound: 1,
             prev_text: 1,
             prev_version: 1,
-            source_motive: "",
-            source_audio: "",
-            source_text: "",
             cache: [],
             currently_in_view: {
                 motive: "",
@@ -22,21 +19,26 @@ class Art extends Component {
 
     async generateMotive(motive, version) {
         const url = "/resources/motive/"+resources.motive[motive][version]+".svg";
-        const data = await this.getDataAndCache(url, false);
-        // const data = this.props.cache[url];
+        if (!(url in this.getCache()))
+            await this.getDataAndCache(url, false);
+        const data = this.getCache()[url];
 
-        console.log(data);
-        let currently_in_view = Object.assign({}, this.state.currently_in_view);
+        let currently_in_view = this.getCurrentlyInView();
         currently_in_view["motive"] = data;
+
+        const element = this.stringToElement(data)
+        this.addMotive(element);
         this.setState({currently_in_view: currently_in_view});
     }
 
     async generateText(text, version) {
         const url = "/resources/text/" + resources.text[text] + ".json";
-        await this.getDataAndCache(url, true);
-        const retrieved_text = this.state.cache[url]["quotes"][version - 1];
-        
-        let currently_in_view = Object.assign({}, this.state.currently_in_view);
+        if (!(url in this.getCache()))
+            await this.getDataAndCache(url, true);
+
+        const cache = this.getCache()
+        const retrieved_text = cache[url]["quotes"][version - 1];
+        const currently_in_view = this.getCurrentlyInView();
         currently_in_view["text"] = retrieved_text;
         this.setState({currently_in_view: currently_in_view});
     }
@@ -54,18 +56,16 @@ class Art extends Component {
     }
 
     async getDataAndCache(url, json) {
-        let cache = Object.assign({}, this.state.cache);
+        let cache = this.getCache();
         if (!(url in cache)) {
             console.log("Adding url: '"+url+"' to cache")
             let cache = this.state.cache;
             cache[url] = "";
-            this.setState({cache: cache});
             await fetch(url)
                 .then(response => json ? response.json() : response.text())
                 .then(response => cache[url] = response);
             this.setState({cache: cache});
         }
-        return this.state.cache[url];
     }
 
     generateArt(motive, sound, text, version) {
@@ -89,16 +89,32 @@ class Art extends Component {
         }
     };
 
-    componentDidMount() {
-
+    getCache() {
+        return Object.assign({}, this.state.cache);
     }
 
+    getCurrentlyInView() {
+        return Object.assign({}, this.state.currently_in_view);
+    }
+
+    stringToElement(string) {
+        let element = document.createElement('div')
+        element.innerHTML = string;
+        return element;
+    }
+
+    addMotive(element) {
+        let motiveContainer = document.getElementById("motive-container");
+        if (motiveContainer.innerHTML != "")
+            motiveContainer.innerHTML = "";
+        motiveContainer.insertAdjacentElement("afterbegin", element);
+    }
+    
     render() {
         this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
         return (
             <div className="artcontainer">
                 <div id={"motive-container"} className="motive">
-                    {this.state.currently_in_view["motive"]}
                 </div>
                 <div id="text-container" className="text">
                     <p>{this.state.currently_in_view["text"]}</p>
