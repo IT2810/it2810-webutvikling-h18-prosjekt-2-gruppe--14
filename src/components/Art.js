@@ -63,8 +63,8 @@ class Art extends Component {
         this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
         return (
             <div className={"art-container"}>
-                <h1 id={"text-container"} className="text"/>
                 <div id={"motive-container"} className="motive"/>
+                <h1 id={"text-container"} className="text"/>
                 <div className="audio">
                     <audio id={"audio-container"} type="audio/mpeg"/>
                 </div>

@@ -3,16 +3,23 @@
     width: 100%;
 }
 
+#motive-container {
+    width: 30vh;
+    display: block;
+    margin: 0 auto;
+}
+
 .motive {
-    padding-left: 10%;
-    padding-right: 10%;
-    vertical-align: center;
+    width: 10vw;
+    padding-left: 17vw;
+    padding-right: 8vw;
+    vertical-align: top;
 }
 
 .text {
-    padding-left: 10%;
-    padding-right: 10%;
-    font-size: 1.5vmax;
+    padding-left: 17vw;
+    padding-right: 8vw;
+    font-size: 4vh;
     font-weight: bold;
     background-color: #666666;
     -webkit-background-clip: text;
@@ -21,17 +28,20 @@
     text-shadow: rgba(255,255,255,0.5) 0 3px 3px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (orientation: landscape) {
     .text {
-        padding-left: 20%;
-        padding-right: 20%;
+        font-size: 4vw;
     }
 }
 
-@media screen and (max-width: 900px) {
-    .text {font-size: 30px;}
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    #motive-container {
+        width: 20vw;
+    }
 }
 
-@media screen and (max-height: 890px) {
-    .text {font-size: 16px;}
+@media screen and (max-height: 720px) {
+    .text {
+        font-size: 3vh;
+    }
 }
