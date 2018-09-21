@@ -21,11 +21,7 @@
     padding-left: 15vmax;
     padding-right: 10vmax;
     font-size: 4vh;
-    background-color: #666666;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0 3px 3px;
+    color: goldenrod;
 }
 
 @media screen and (orientation: landscape) {

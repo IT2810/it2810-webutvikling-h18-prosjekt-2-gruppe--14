@@ -9,11 +9,13 @@ class Art extends Component {
             prev_sound: 1,
             prev_text: 1,
             prev_version: 1,
+            isLoaded: false,
             cache: [],
             currently_in_view: {
                 motive: "",
                 text: ""
             }
+            
         }
     }
 
@@ -111,6 +113,16 @@ class Art extends Component {
         let motiveContainer = document.getElementById(id);
         motiveContainer.innerHTML = "";
         motiveContainer.insertAdjacentElement("afterbegin", element);
+    }
+
+
+    componentDidMount() {
+        if (!this.state.isLoaded) {
+            this.setState({isLoaded: true});
+            this.generateText(1,1);
+            this.generateMotive(1,1);
+            this.generateAudio(1,1);
+        }
     }
     
     render() {
