@@ -21,7 +21,7 @@
     font-size: 5vw;
     cursor: pointer;
     outline: 0;
-    border-radius: 20%;
+    border-radius: 3%;
 }
 
 .tab:hover, .tabactive:hover {
@@ -43,7 +43,7 @@
     cursor: pointer;
     outline: 0;
     background-color: white;
-    border-radius: 20%;
+    border-radius: 3%;
 
 }
 
