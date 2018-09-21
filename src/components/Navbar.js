@@ -15,19 +15,15 @@ class Navbar extends Component {
     //Function opening and closing the navbar by changing width. 
     handleNav() {
         if(this.state.hide) {
-            if (window.innerWidth > window.innerHeight) {
-                document.getElementById("mySidebar").style.width = "75vh";
-            } else {
-                document.getElementById("mySidebar").style.width = "70vw";
-            }
+            document.getElementById("mySidebar").style.width = "50vmax";
         } else {
-            document.getElementById("mySidebar").style.width = "12vw";
+            document.getElementById("mySidebar").style.width = "12vmax";
         }
     }
 
     //Function that runs immideatly after the component (Navbar) renders -> Making the navbar visible.
     componentDidMount() {
-        document.getElementById("mySidebar").style.width = "12vw";
+        document.getElementById("mySidebar").style.width = "12vmax";
     }
 
     //Function rendering the navbar and listening for changes in settings. 

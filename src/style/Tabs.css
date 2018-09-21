@@ -1,15 +1,15 @@
 .tab-container {
     position: absolute;
     z-index: 10;
-    width: 15vw;
+    width: 15vmax;
     height: 40vh;
     min-width: 60px;
 }
 
 .tab {
-    width: 9vw;
+    width: 9vmax;
     min-width: 50px;
-    height: 9vw;
+    height: 9vmax;
     min-height: 50px;
     display: flex;
     align-items: center;
@@ -28,9 +28,9 @@
 }
 
 .tabactive {
-    width: 9vw;
+    width: 9vmax;
     min-width: 50px;
-    height: 9vw;
+    height: 9vmax;
     min-height: 50px;
     display: flex;
     align-items: center;
