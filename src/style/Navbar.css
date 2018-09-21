@@ -1,7 +1,6 @@
 .sidebar {
   height: 100%;
   width: 10vmax;
-  min-width: 60px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -83,7 +82,7 @@
   cursor: pointer;
   position: absolute;
   top: 5px;
-  left: 5%;
+  right: 4vh;
 }
 
 .bar1, .bar2, .bar3 {

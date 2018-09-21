@@ -7,17 +7,17 @@
 }
 
 .tab {
-    width: 9vmax;
+    width: 11vmax;
     min-width: 50px;
     height: 9vmax;
     min-height: 50px;
     display: flex;
-    align-items: center;
     background-color: #818181;
     border: 2px solid black;
     margin: 3px;
     color: black;
-    text-align: center;
+    text-align: justify;
+    text-indent: 3.6vmax;
     font-size: 5vw;
     cursor: pointer;
     outline: 0;
@@ -28,7 +28,7 @@
 }
 
 .tabactive {
-    width: 9vmax;
+    width: 11vmax;
     min-width: 50px;
     height: 9vmax;
     min-height: 50px;
@@ -37,7 +37,7 @@
     border: 2px solid goldenrod;
     margin: 3px;
     color: black;
-    text-align: center;
+    text-indent: 3.6vmax;
     font-size: 5vw;
     cursor: pointer;
     outline: 0;
