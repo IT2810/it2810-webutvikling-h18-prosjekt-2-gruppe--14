@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './../style/Tabs.css';
-import Art from "./Art";
 
 class Tabs extends Component {
     constructor(props) {
@@ -17,26 +16,20 @@ class Tabs extends Component {
                 <div className="tab-container">
                     <button className={this.state.art == 1 ? "tabactive" : "tab"} onClick={e => {
                         this.setState({art: 1});
-                    }}>1
-                    </button>
+                        this.props.changeVersion(1);
+                    }}>1</button>
                     <button className={this.state.art == 2 ? "tabactive" : "tab"} onClick={e => {
                         this.setState({art: 2});
-                    }}>2
-                    </button>
+                        this.props.changeVersion(2);
+                    }}>2</button>
                     <button className={this.state.art == 3 ? "tabactive" : "tab"} onClick={e => {
                         this.setState({art: 3});
-                    }}>3
-                    </button>
+                        this.props.changeVersion(3);
+                    }}>3</button>
                     <button className={this.state.art == 4 ? "tabactive" : "tab"} onClick={e => {
                         this.setState({art: 4});
-                    }}>4
-                    </button>
-                </div>
-                <div>
-                    <Art
-                        settings={this.props.settings}
-                        art={this.state.art}
-                    ></Art>
+                        this.props.changeVersion(4);
+                    }}>4</button>
                 </div>
             </div>
         );

@@ -1,63 +1,55 @@
+.art-container {
+    display: table;
+    width: 100%;
+}
 
+#motive-container {
+    width: 30vh;
+    display: block;
+    margin: 0 auto;
+    
+}
 
 .motive {
-    position: fixed;
-    top: 55%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
+    width: 10vw;
+    padding-left: 15vmax;
+    padding-right: 9vmax;
+    vertical-align: top;
 }
 
 .text {
-    font-size: 50px;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-
-    font-weight: bold;
+    padding-left: 15vmax;
+    padding-right: 10vmax;
+    font-size: 4vh;
     background-color: #666666;
     -webkit-background-clip: text;
     -moz-background-clip: text;
-    background-clip: text;
     color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
-    padding-top: 100px;
-
+    text-shadow: rgba(255,255,255,0.5) 0 3px 3px;
 }
 
-.audio{
-    position: fixed;
-    top: 85%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-
-}
-
-/* The smallest iphone is 320px wide - our design meets the requirements down to that width */
-
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 560px) {
-    .text {font-size: 20px;}
-}
-
-@media screen and (max-width: 900px) {
-    .text {font-size: 30px;}
-}
-
-@media screen and (max-width: 410px) {
-    .audio{
-        /* Adapting position regarding navbar on smaller devices */
-        margin-left:42px;
+@media screen and (orientation: landscape) {
+    .text {
+        font-size: 4vw;
     }
+}
 
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    #motive-container {
+        width: 20vw;
+    }
 }
 
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 890px) {
-    .text {font-size: 16px;}
+
+@media screen and (max-height: 720px) {
+    .text {
+        font-size: 3vh;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .text {
+        font-size: 3vh;
+    }
 }

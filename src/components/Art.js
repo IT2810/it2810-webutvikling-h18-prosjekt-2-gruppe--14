@@ -26,7 +26,7 @@ class Art extends Component {
         let currently_in_view = this.getCurrentlyInView();
         currently_in_view["motive"] = data;
         const element = this.stringToElement(data)
-        this.addMotive(element);
+        this.addElement(element, "motive-container");
         
         this.setState({currently_in_view: currently_in_view});
     }
@@ -36,10 +36,13 @@ class Art extends Component {
         if (!(url in this.getCache()))
             await this.getDataAndCache(url, true);
 
-        const cache = this.getCache()
-        const retrieved_text = cache[url]["quotes"][version - 1];
+        const retrieved_text = this.getCache()[url]["quotes"][version - 1];
         const currently_in_view = this.getCurrentlyInView();
         currently_in_view["text"] = retrieved_text;
+
+        text = document.createElement("p");
+        text.innerHTML = retrieved_text;
+        this.addElement(text, "text-container");
 
         this.setState({currently_in_view: currently_in_view});
     }
@@ -104,12 +107,12 @@ class Art extends Component {
         return element;
     }
 
-    addMotive(element) {
-        let motiveContainer = document.getElementById("motive-container");
+    addElement(element, id) {
+        let motiveContainer = document.getElementById(id);
         motiveContainer.innerHTML = "";
         motiveContainer.insertAdjacentElement("afterbegin", element);
     }
-
+    
     render() {
         this.generateArt(this.props.settings.motive, this.props.settings.sound, this.props.settings.text, this.props.art);
         return (
@@ -117,7 +120,6 @@ class Art extends Component {
                 <div id={"motive-container"} className="motive">
                 </div>
                 <div id="text-container" className="text">
-                    <p>{this.state.currently_in_view["text"]}</p>
                 </div>
                 <div className="audio">
                     <audio id={"audio-container"} type="audio/mpeg"></audio>

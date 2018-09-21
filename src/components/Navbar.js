@@ -9,21 +9,21 @@ class Navbar extends Component {
             motive: 1,
             sound: 1,
             text: 1
-        }
+        };
     }
 
     //Function opening and closing the navbar by changing width. 
     handleNav() {
         if(this.state.hide) {
-            document.getElementById("mySidebar").style.width = "320px";
+            document.getElementById("mySidebar").style.width = "50vmax";
         } else {
-            document.getElementById("mySidebar").style.width = "60px";
+            document.getElementById("mySidebar").style.width = "12vmax";
         }
     }
 
     //Function that runs immideatly after the component (Navbar) renders -> Making the navbar visible.
     componentDidMount() {
-        document.getElementById("mySidebar").style.width = "60px";
+        document.getElementById("mySidebar").style.width = "12vmax";
     }
 
     //Function rendering the navbar and listening for changes in settings. 

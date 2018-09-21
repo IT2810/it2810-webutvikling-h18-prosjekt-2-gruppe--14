@@ -1,6 +1,6 @@
 .sidebar {
   height: 100%;
-  width: 60;
+  width: 10vmax;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -13,9 +13,10 @@
 }
 
 .sidebar a {
-  padding: 8px 8px 8px 32px;
+  padding-left: 11vw;
+  padding-bottom: 2vh;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 5vh;
   color: goldenrod;
   display: block;
   transition: 0.3s;
@@ -27,9 +28,10 @@
 }
 
 .sidebar div {
-  padding: 4px 4px 4px 16px;
+  padding-left: 11vw;
+  padding-bottom: 2vh;
   text-decoration: none;
-  font-size: 19px;
+  font-size: 3vh;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -80,7 +82,7 @@
   cursor: pointer;
   position: absolute;
   top: 5px;
-  right: 12px;
+  right: 4vh;
 }
 
 .bar1, .bar2, .bar3 {
@@ -117,15 +119,4 @@
   background-color: white;
   margin: 6px 0;
   transition: 0.4s;
-}
-
-
-
-
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-  .sidebar div {font-size:15; padding: 2px 2px 2px 8px;}
 }

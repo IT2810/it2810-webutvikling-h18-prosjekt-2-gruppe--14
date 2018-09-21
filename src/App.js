@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
-import logo from './logo.svg';
-import './App.css';
+
 import Title from './components/Title';
+import Art from './components/Art';
 import Navbar from './components/Navbar';
 import Tabs from './components/Tabs';
 import Footer from './components/Footer';
+import './App.css';
 
 class App extends Component {
     constructor(props) {
@@ -19,8 +19,8 @@ class App extends Component {
                 motive: 1,
                 sound: 1,
                 text: 1,
-                version: 1
-            }
+            },
+            art: 1
         };
     }
 
@@ -33,7 +33,7 @@ class App extends Component {
                 text: this.state.settings.text,
             }
         });
-    }
+    };
 
     //Function that gets passed down to the Navbar - changing sound setting.
     changeSound = (value) => {
@@ -44,7 +44,7 @@ class App extends Component {
                 text: this.state.settings.text,
             }
         });
-    }
+    };
 
     //Function that gets passed down to the Navbar - changing text setting.
     changeText = (value) => {
@@ -55,6 +55,14 @@ class App extends Component {
                 text: value,
             }
         });
+    };
+
+    changeVersion = (value) => {
+        this.setState(
+            {
+                art: value,
+            }
+        );
     }
 
     //Function rendering the webpage header.
@@ -62,6 +70,7 @@ class App extends Component {
         return (
             <div className="item1">
                 <Navbar changeMotive={this.changeMotive} changeSound={this.changeSound} changeText={this.changeText}/>
+                <Tabs changeVersion={this.changeVersion}/>
             </div>
         );
     }
@@ -70,19 +79,16 @@ class App extends Component {
     renderArt() {
         return (
             <div className="item2">
-                <Tabs settings={this.state.settings}/>
+                <Art settings={this.state.settings} art={this.state.art}/>
             </div>
         );
     }
-
-
-
 
     //Function rendering the webpage footer.
     renderFooter() {
         return (
             <div className="item3">
-                <Footer></Footer>
+                <Footer/>
             </div>
         );
     }
@@ -91,18 +97,11 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <div class='outer-scratch'>
-                    <div class="inner-scratch">
-                        <div class="background grain"></div>
-                    </div>
-
                     <div className="grid-container">
                         {this.renderHeader()}
-
                         {this.renderArt()}
                         {this.renderFooter()}
                     </div>
-                </div>
             </div>
         );
     }
